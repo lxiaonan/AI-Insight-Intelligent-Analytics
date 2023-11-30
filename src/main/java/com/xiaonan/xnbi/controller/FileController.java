@@ -8,6 +8,7 @@ import com.xiaonan.xnbi.constant.FileConstant;
 import com.xiaonan.xnbi.exception.BusinessException;
 import com.xiaonan.xnbi.manager.CosManager;
 import com.xiaonan.xnbi.model.dto.file.UploadFileRequest;
+import com.xiaonan.xnbi.model.entity.User;
 import com.xiaonan.xnbi.model.enums.FileUploadBizEnum;
 
 import java.io.File;
@@ -15,6 +16,7 @@ import java.util.Arrays;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.xiaonan.xnbi.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -3,10 +3,13 @@ package com.xiaonan.xnbi.aop;
 import com.xiaonan.xnbi.annotation.AuthCheck;
 import com.xiaonan.xnbi.common.ErrorCode;
 import com.xiaonan.xnbi.exception.BusinessException;
+import com.xiaonan.xnbi.model.entity.User;
 import com.xiaonan.xnbi.model.enums.UserRoleEnum;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import com.xiaonan.xnbi.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

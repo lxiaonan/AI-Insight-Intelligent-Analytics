@@ -6,6 +6,7 @@
 
     <resultMap id="BaseResultMap" type="com.xiaonan.xnbi.model.entity.Chart">
             <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userId" column="id" jdbcType="BIGINT"/>
             <result property="goal" column="goal" jdbcType="VARCHAR"/>
             <result property="chartData" column="chartData" jdbcType="VARCHAR"/>
             <result property="chartType" column="chartType" jdbcType="VARCHAR"/>
@@ -17,7 +18,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,goal,chartData,
+        id,userId,goal,chartData,
         chartType,genChart,genResult,
         createTime,updateTime,isDelete
     </sql>

@@ -15,6 +15,7 @@ import com.xiaonan.xnbi.model.dto.post.PostEditRequest;
 import com.xiaonan.xnbi.model.dto.post.PostQueryRequest;
 import com.xiaonan.xnbi.model.dto.post.PostUpdateRequest;
 import com.xiaonan.xnbi.model.entity.Post;
+import com.xiaonan.xnbi.model.entity.User;
 import com.xiaonan.xnbi.model.vo.PostVO;
 import com.xiaonan.xnbi.service.PostService;
 
@@ -22,6 +23,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.xiaonan.xnbi.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.GetMapping;

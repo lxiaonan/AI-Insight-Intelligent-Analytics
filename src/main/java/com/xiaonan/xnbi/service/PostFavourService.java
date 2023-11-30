@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xiaonan.xnbi.model.entity.Post;
 import com.xiaonan.xnbi.model.entity.PostFavour;
+import com.xiaonan.xnbi.model.entity.User;
 
 /**
  * 帖子收藏服务

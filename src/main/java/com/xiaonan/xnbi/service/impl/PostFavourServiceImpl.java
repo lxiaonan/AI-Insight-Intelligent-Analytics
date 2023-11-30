@@ -10,6 +10,7 @@ import com.xiaonan.xnbi.exception.BusinessException;
 import com.xiaonan.xnbi.mapper.PostFavourMapper;
 import com.xiaonan.xnbi.model.entity.Post;
 import com.xiaonan.xnbi.model.entity.PostFavour;
+import com.xiaonan.xnbi.model.entity.User;
 import com.xiaonan.xnbi.service.PostFavourService;
 import com.xiaonan.xnbi.service.PostService;
 import javax.annotation.Resource;

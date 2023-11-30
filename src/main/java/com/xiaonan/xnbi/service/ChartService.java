@@ -1,7 +1,10 @@
 package com.xiaonan.xnbi.service;
 
-import generator.domain.Chart;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xiaonan.xnbi.model.dto.chart.ChartQueryRequest;
+import com.xiaonan.xnbi.model.entity.Chart;
+import com.xiaonan.xnbi.model.entity.Post;
 
 /**
 * @author 罗宇楠
@@ -9,5 +12,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-11-29 22:22:32
 */
 public interface ChartService extends IService<Chart> {
+    /**
+     * 获取查询包装类
+     *
+     * @param chartQueryRequest
+     * @return
+     */
+    public QueryWrapper<Chart> getQueryWrapper(ChartQueryRequest chartQueryRequest);
 
 }

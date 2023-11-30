@@ -7,6 +7,7 @@ import com.xiaonan.xnbi.exception.BusinessException;
 import com.xiaonan.xnbi.mapper.PostThumbMapper;
 import com.xiaonan.xnbi.model.entity.Post;
 import com.xiaonan.xnbi.model.entity.PostThumb;
+import com.xiaonan.xnbi.model.entity.User;
 import com.xiaonan.xnbi.service.PostService;
 import com.xiaonan.xnbi.service.PostThumbService;
 import javax.annotation.Resource;

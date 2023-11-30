@@ -2,6 +2,7 @@ package com.xiaonan.xnbi.service;
 
 import com.xiaonan.xnbi.model.entity.PostThumb;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xiaonan.xnbi.model.entity.User;
 
 /**
  * 帖子点赞服务

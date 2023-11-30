@@ -5,10 +5,13 @@ import com.xiaonan.xnbi.common.ErrorCode;
 import com.xiaonan.xnbi.common.ResultUtils;
 import com.xiaonan.xnbi.exception.BusinessException;
 import com.xiaonan.xnbi.model.dto.postthumb.PostThumbAddRequest;
+import com.xiaonan.xnbi.model.entity.User;
 import com.xiaonan.xnbi.service.PostThumbService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import com.xiaonan.xnbi.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
