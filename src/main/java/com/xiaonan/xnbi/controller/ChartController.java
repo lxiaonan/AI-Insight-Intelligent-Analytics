@@ -1,5 +1,6 @@
 package com.xiaonan.xnbi.controller;
 
+import com.alibaba.excel.util.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.gson.Gson;
 import com.xiaonan.xnbi.annotation.AuthCheck;
@@ -10,17 +11,17 @@ import com.xiaonan.xnbi.common.ResultUtils;
 import com.xiaonan.xnbi.constant.UserConstant;
 import com.xiaonan.xnbi.exception.BusinessException;
 import com.xiaonan.xnbi.exception.ThrowUtils;
-import com.xiaonan.xnbi.model.dto.chart.ChartAddRequest;
-import com.xiaonan.xnbi.model.dto.chart.ChartEditRequest;
-import com.xiaonan.xnbi.model.dto.chart.ChartQueryRequest;
-import com.xiaonan.xnbi.model.dto.chart.ChartUpdateRequest;
+import com.xiaonan.xnbi.model.dto.chart.*;
 import com.xiaonan.xnbi.model.entity.Chart;
 import com.xiaonan.xnbi.model.entity.User;
 import com.xiaonan.xnbi.service.ChartService;
 import com.xiaonan.xnbi.service.UserService;
+import com.xiaonan.xnbi.utils.AiUtils;
+import com.xiaonan.xnbi.utils.ExcelUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,6 @@ import javax.servlet.http.HttpServletRequest;
  * 帖子接口
  *
  * @author <a href="https://github.com/lixiaonan">小楠</a>
- *
  */
 @RestController
 @RequestMapping("/chart")
@@ -39,7 +39,6 @@ public class ChartController {
 
     @Resource
     private ChartService chartService;
-
     @Resource
     private UserService userService;
 
@@ -145,7 +144,7 @@ public class ChartController {
      */
     @PostMapping("/list/page")
     public BaseResponse<Page<Chart>> listChartByPage(@RequestBody ChartQueryRequest chartQueryRequest,
-            HttpServletRequest request) {
+                                                     HttpServletRequest request) {
         long current = chartQueryRequest.getCurrent();
         long size = chartQueryRequest.getPageSize();
         // 限制爬虫
@@ -164,7 +163,7 @@ public class ChartController {
      */
     @PostMapping("/my/list/page")
     public BaseResponse<Page<Chart>> listMyChartByPage(@RequestBody ChartQueryRequest chartQueryRequest,
-            HttpServletRequest request) {
+                                                       HttpServletRequest request) {
         if (chartQueryRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -207,4 +206,43 @@ public class ChartController {
         return ResultUtils.success(result);
     }
 
+    @PostMapping("gen")
+    public BaseResponse<AIResultDto> genChartByAi(@RequestPart("file") MultipartFile file
+            , ChartByAIRequest chartByAIRequest,HttpServletRequest request) {
+        //获取当前用户id
+        User loginUser = userService.getLoginUser(request);
+        String goal = chartByAIRequest.getGoal();
+        String name = chartByAIRequest.getName();
+        String chartType = chartByAIRequest.getChartType();
+        //校验
+        ThrowUtils.throwIf(StringUtils.isBlank(goal), ErrorCode.PARAMS_ERROR);
+        ThrowUtils.throwIf(StringUtils.isNotBlank(name) && name.length() >= 64, ErrorCode.PARAMS_ERROR,"名称过长");
+        ThrowUtils.throwIf(StringUtils.isBlank(chartType), ErrorCode.PARAMS_ERROR);
+
+        //根据用户上传的数据，压缩ai提问语
+        StringBuffer res = new StringBuffer();
+        res.append("你是一个数据分析师和前端开发专家，接下来我会按照以下固定格式给你提供内容：");
+        res.append("\n").append("分析需求：").append("\n").append("{").append(goal).append("}").append("\n");
+
+        String data = ExcelUtils.excelToCsv(file);
+        res.append("原始数据:").append("\n").append(data);
+        res.append("请根据这两部分内容，按照以下指定格式生成内容（此外不要输出任何多余的开头、结尾、注释）\n【【【【【\n先输出上面原始数据的分析结果：\n然后输出【【【【【\n{前端 Echarts V5 的 option 配置对象js代码，生成");
+        res.append(chartType);
+        res.append("合理地将数据进行可视化，不要生成任何多余的内容，不要注释}");
+
+        AIResultDto ans = AiUtils.getAns(res.toString());
+        Chart chart = new Chart();
+        chart.setName(name);
+        chart.setUserId(loginUser.getId());
+        chart.setGoal(goal);
+        chart.setChartData(data);
+        chart.setChartType(chartType);
+        chart.setGenChart(ans.getChartData());
+        chart.setGenResult(ans.getOnAnalysis());
+        //将创建的图表保存到数据库
+        boolean save = chartService.save(chart);
+        ThrowUtils.throwIf(!save, ErrorCode.SYSTEM_ERROR);
+        ans.setChartId(chart.getId());
+        return ResultUtils.success(ans);
+    }
 }

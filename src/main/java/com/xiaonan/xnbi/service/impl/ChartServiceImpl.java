@@ -45,8 +45,10 @@ public class ChartServiceImpl extends ServiceImpl<ChartMapper, Chart>
         String goal = chartQueryRequest.getGoal();
         String chartType = chartQueryRequest.getChartType();
         String genResult = chartQueryRequest.getGenResult();
+        String name = chartQueryRequest.getName();
 
         queryWrapper.eq(id != null && id > 0 , "id",id);
+        queryWrapper.like(StringUtils.isNotBlank(name) , "name",name);
         queryWrapper.eq(StringUtils.isNotBlank(chartType) , "chartType",chartType);
         queryWrapper.like(StringUtils.isNotBlank(goal),"goal",goal);
 

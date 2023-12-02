@@ -1,6 +1,8 @@
 package com.xiaonan.xnbi.service.impl;
 
 
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.LocalDateTimeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -74,6 +76,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             // 3. 插入数据
             User user = new User();
             user.setUserAccount(userAccount);
+            user.setUserName(userAccount);
+            user.setCreateTime(DateTime.now());
             user.setUserPassword(encryptPassword);
             boolean saveResult = this.save(user);
             if (!saveResult) {

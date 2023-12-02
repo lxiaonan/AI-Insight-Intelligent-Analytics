@@ -26,7 +26,10 @@ public class ChartQueryRequest extends PageRequest implements Serializable {
      */
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
-
+    /**
+     * 图表名称
+     */
+    private String name;
     /**
      * 用户id
      */

@@ -20,6 +20,11 @@ public class Chart implements Serializable {
     private Long id;
 
     /**
+     * 图表名称
+     */
+    private String name;
+
+    /**
      * 用户id
      */
     private Long userId;
@@ -40,7 +45,7 @@ public class Chart implements Serializable {
     private String chartType;
 
     /**
-     * 生成的图标数据
+     * 生成的图表数据
      */
     private String genChart;
 
