@@ -1,19 +1,10 @@
 # SpringBoot 项目初始模板
 
-> 作者：[程序员鱼皮](https://github.com/lxiaonan)
-> 仅分享于 [编程导航知识星球](https://yupi.icu)
 
-基于 Java SpringBoot 的项目初始模板，整合了常用框架和主流业务的示例代码。
-
-只需 1 分钟即可完成内容网站的后端！！！大家还可以在此基础上快速开发自己的项目。
-
-[toc]
-
-## 模板特点
 
 ### 主流框架 & 特性
 
-- Spring Boot 2.7.x（贼新）
+- Spring Boot 2.7.2
 - Spring MVC
 - MyBatis + MyBatis Plus 数据访问（开启分页）
 - Spring Boot 调试工具和项目处理器
@@ -72,10 +63,6 @@
 - 合理分层
 
 
-## 快速上手
-
-> 所有需要修改的地方鱼皮都标记了 `todo`，便于大家找到修改的位置~
-
 ### MySQL 数据库
 
 1）修改 `application.yml` 的数据库配置为你自己的：
@@ -91,7 +78,7 @@ spring:
 
 2）执行 `sql/create_table.sql` 中的数据库语句，自动创建库表
 
-3）启动项目，访问 `http://localhost:8101/api/doc.html` 即可打开接口文档，不需要写前端就能在线调试接口了~
+3）启动项目，访问 `http://localhost:8301/api/doc.html` 即可打开接口文档，不需要写前端就能在线调试接口了~
 
 ![](doc/swagger.png)
 
@@ -106,7 +93,6 @@ spring:
     host: localhost
     port: 6379
     timeout: 5000
-    password: 123456
 ```
 
 2）修改 `application.yml` 中的 session 存储方式：
@@ -153,13 +139,4 @@ PUT post_v1
 }
 ```
 
-这步不会操作的话需要补充下 Elasticsearch 的知识，或者自行百度一下~
 
-3）开启同步任务，将数据库的帖子同步到 Elasticsearch
-
-找到 job 目录下的 `FullSyncPostToEs` 和 `IncSyncPostToEs` 文件，取消掉 `@Component` 注解的注释，再次执行程序即可触发同步：
-
-```java
-// todo 取消注释开启任务
-//@Component
-```
