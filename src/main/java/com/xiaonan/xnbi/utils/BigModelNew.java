@@ -5,7 +5,13 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import okhttp3.*;
+import org.redisson.api.RBucket;
+import org.redisson.api.RedissonClient;
+import org.redisson.client.RedisClient;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
@@ -13,16 +19,22 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class BigModelNew extends WebSocketListener {
     // 地址与鉴权信息  https://spark-api.xf-yun.com/v1.1/chat   1.5地址  domain参数为general
     // 地址与鉴权信息  https://spark-api.xf-yun.com/v2.1/chat   2.0地址  domain参数为generalv2
     public static final String hostUrl = "https://spark-api.xf-yun.com/v3.1/chat";
-    public static final String appid = "b9706276";
-    public static final String apiSecret = "MjliODA2YzdiYWUwZTAxMjYzZDI5NGJh";
-    public static final String apiKey = "3669b2806547033bab68989b079ed2f2";
+    public static final String appid = "**";
+    public static final String apiSecret = "**";
+    public static final String apiKey = "**";
     public static List<RoleContent> historyList = new ArrayList<>(); // 对话历史存储集合
     public static String totalAnswer = ""; // 大模型的答案汇总
+
+    //当前问题id
+    private static long questionId;
+
+    private static RedissonClient redissonClient;
 
     // 环境治理的重要性  环保  人口老龄化  我爱我的祖国
     public static String NewQuestion = "";
@@ -40,7 +52,10 @@ public class BigModelNew extends WebSocketListener {
         this.userId = userId;
         this.wsCloseFlag = wsCloseFlag;
     }
-
+    public BigModelNew(long questionId, RedissonClient redissonClient){
+        this.questionId = questionId;
+        this.redissonClient = redissonClient;
+    }
     public  void getResult(String newQuestion) {
         try {
 
@@ -161,14 +176,19 @@ public class BigModelNew extends WebSocketListener {
                         break;
                     }
                 }
+                //ai数据生成完毕哦，向redis写入键
+                RBucket<String> bucket = redissonClient.getBucket("complete" + questionId);
+                bucket.set("true");
                 webSocket.close(1000, "");
 //                System.out.println(totalAnswer);
             } catch (Exception e) {
+                //失败
+                RBucket<String> bucket = redissonClient.getBucket("complete" + questionId);
+                bucket.set("false");
                 e.printStackTrace();
             }
         }
     }
-    public BigModelNew(){}
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
         super.onOpen(webSocket, response);
@@ -180,8 +200,22 @@ public class BigModelNew extends WebSocketListener {
         // 创建一个新的线程
         sleepThread = new Thread(() -> {
             try {
-                // 线程休眠7秒
-                Thread.sleep(8000);
+//                // 线程休眠7秒
+//                Thread.sleep(40000);
+                //循环等待ai生成完毕
+                int times = 0;//现在循环次数
+                while(true){
+                    if(times > 90)
+                        break;
+                    Thread.sleep(2000);
+                    RBucket<String> bucket = redissonClient.getBucket("complete" + questionId);
+                    String res = bucket.get();
+                    if(Objects.equals(res, "true")){
+                        bucket.delete();//取完就删除
+                        break;
+                    }
+                    times++;
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -216,7 +250,7 @@ public class BigModelNew extends WebSocketListener {
             totalAnswer = totalAnswer + temp.content;
         }
 
-        System.err.print(res.toString());
+//        System.err.print(res.toString());
         if (myJsonParse.header.status == 2) {
             // 可以关闭连接，释放资源
             if (canAddHistory()) {

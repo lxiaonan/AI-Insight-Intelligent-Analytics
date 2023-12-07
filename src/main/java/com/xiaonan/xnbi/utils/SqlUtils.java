@@ -2,11 +2,12 @@ package com.xiaonan.xnbi.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Scanner;
+
 /**
  * SQL 工具
  *
  * @author <a href="https://github.com/lixiaonan">小楠</a>
- * 
  */
 public class SqlUtils {
 
@@ -22,4 +23,5 @@ public class SqlUtils {
         }
         return !StringUtils.containsAny(sortField, "=", "(", ")", " ");
     }
+
 }

@@ -8,6 +8,7 @@ import com.xiaonan.xnbi.model.dto.post.PostQueryRequest;
 import com.xiaonan.xnbi.model.entity.Chart;
 import com.xiaonan.xnbi.model.entity.Chart;
 import com.xiaonan.xnbi.model.entity.Post;
+import com.xiaonan.xnbi.model.enums.ChartStateEnum;
 import com.xiaonan.xnbi.service.ChartService;
 import com.xiaonan.xnbi.mapper.ChartMapper;
 import com.xiaonan.xnbi.utils.SqlUtils;
@@ -53,7 +54,6 @@ public class ChartServiceImpl extends ServiceImpl<ChartMapper, Chart>
         queryWrapper.like(StringUtils.isNotBlank(goal),"goal",goal);
 
 
-
         queryWrapper.like(StringUtils.isNotBlank(genResult), "genResult", genResult);
 
         queryWrapper.eq(ObjectUtils.isNotEmpty(id), "id", id);
@@ -62,6 +62,18 @@ public class ChartServiceImpl extends ServiceImpl<ChartMapper, Chart>
         queryWrapper.orderBy(SqlUtils.validSortField(sortField), sortOrder.equals(CommonConstant.SORT_ORDER_ASC),
                 sortField);
         return queryWrapper;
+    }
+
+    @Override
+    public void handleChartUpdateError(long chartId, String message) {
+        Chart updateChart = new Chart();
+        updateChart.setId(chartId);
+        updateChart.setState(ChartStateEnum.FAIL.getValue());
+        updateChart.setExecMessage(message);
+        boolean updateById = updateById(updateChart);
+        if (!updateById) {
+            log.debug("更新图片状态失败处理失败");
+        }
     }
 
 

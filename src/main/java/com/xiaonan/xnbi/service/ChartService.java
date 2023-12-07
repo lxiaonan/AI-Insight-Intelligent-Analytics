@@ -20,4 +20,6 @@ public interface ChartService extends IService<Chart> {
      */
     public QueryWrapper<Chart> getQueryWrapper(ChartQueryRequest chartQueryRequest);
 
+    public void handleChartUpdateError(long chartId, String message);
+
 }
