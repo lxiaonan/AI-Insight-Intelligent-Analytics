@@ -25,9 +25,9 @@ public class BigModelNew extends WebSocketListener {
     // 地址与鉴权信息  https://spark-api.xf-yun.com/v1.1/chat   1.5地址  domain参数为general
     // 地址与鉴权信息  https://spark-api.xf-yun.com/v2.1/chat   2.0地址  domain参数为generalv2
     public static final String hostUrl = "https://spark-api.xf-yun.com/v3.1/chat";
-    public static final String appid = "**";
-    public static final String apiSecret = "**";
-    public static final String apiKey = "**";
+    public static final String appid = "b9706276";
+    public static final String apiSecret = "MjliODA2YzdiYWUwZTAxMjYzZDI5NGJh";
+    public static final String apiKey = "3669b2806547033bab68989b079ed2f2";
     public static List<RoleContent> historyList = new ArrayList<>(); // 对话历史存储集合
     public static String totalAnswer = ""; // 大模型的答案汇总
 
@@ -52,11 +52,13 @@ public class BigModelNew extends WebSocketListener {
         this.userId = userId;
         this.wsCloseFlag = wsCloseFlag;
     }
-    public BigModelNew(long questionId, RedissonClient redissonClient){
+
+    public BigModelNew(long questionId, RedissonClient redissonClient) {
         this.questionId = questionId;
         this.redissonClient = redissonClient;
     }
-    public  void getResult(String newQuestion) {
+
+    public void getResult(String newQuestion) {
         try {
 
             totalFlag = false;
@@ -116,7 +118,9 @@ public class BigModelNew extends WebSocketListener {
             return true;
         }
     }
+
     Thread sleepThread;
+
     // 线程来发送音频与参数
     class MyThread extends Thread {
         private WebSocket webSocket;
@@ -189,6 +193,7 @@ public class BigModelNew extends WebSocketListener {
             }
         }
     }
+
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
         super.onOpen(webSocket, response);
@@ -196,7 +201,8 @@ public class BigModelNew extends WebSocketListener {
         MyThread myThread = new MyThread(webSocket);
         myThread.start();
     }
-    public  String getReturn(){
+
+    public String getReturn() {
         // 创建一个新的线程
         sleepThread = new Thread(() -> {
             try {
@@ -204,13 +210,13 @@ public class BigModelNew extends WebSocketListener {
 //                Thread.sleep(40000);
                 //循环等待ai生成完毕
                 int times = 0;//现在循环次数
-                while(true){
-                    if(times > 90)
+                while (true) {
+                    if (times > 90)
                         break;
                     Thread.sleep(2000);
                     RBucket<String> bucket = redissonClient.getBucket("complete" + questionId);
                     String res = bucket.get();
-                    if(Objects.equals(res, "true")){
+                    if (Objects.equals(res, "true")) {
                         bucket.delete();//取完就删除
                         break;
                     }
@@ -233,6 +239,7 @@ public class BigModelNew extends WebSocketListener {
         }
         return totalAnswer;
     }
+
     @Override
     public void onMessage(WebSocket webSocket, String text) {
         // System.out.println(userId + "用来区分那个用户的结果" + text);
