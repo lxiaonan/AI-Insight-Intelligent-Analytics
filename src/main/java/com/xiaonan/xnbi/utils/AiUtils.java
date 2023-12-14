@@ -1,13 +1,7 @@
 package com.xiaonan.xnbi.utils;
 
 import com.xiaonan.xnbi.model.dto.chart.AIResultDto;
-import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
-import org.redisson.client.RedisClient;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 public class AiUtils {
     private final RedissonClient redissonClient;
@@ -15,9 +9,9 @@ public class AiUtils {
         this.redissonClient = redissonClient;
     }
     public AIResultDto getAns(long chartId,String question) {
-        BigModelNew bigModelNew = new BigModelNew(chartId,redissonClient);
-        bigModelNew.getResult(question);
-        String aReturn = bigModelNew.getReturn();
+        BigModelChar bigModelChar = new BigModelChar(chartId,redissonClient);
+        bigModelChar.getResult(question);
+        String aReturn = bigModelChar.getReturn();
         String chartData = "服务错误";
         String onAnalysis = "服务错误";
         if(aReturn.contains("：") && aReturn.contains("然后输出【【【【【"))

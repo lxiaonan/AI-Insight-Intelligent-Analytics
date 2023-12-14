@@ -7,11 +7,7 @@ import com.google.gson.Gson;
 import okhttp3.*;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
-import org.redisson.client.RedisClient;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
@@ -19,9 +15,8 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
-public class BigModelNew extends WebSocketListener {
+public class BigModelChar extends WebSocketListener {
     // 地址与鉴权信息  https://spark-api.xf-yun.com/v1.1/chat   1.5地址  domain参数为general
     // 地址与鉴权信息  https://spark-api.xf-yun.com/v2.1/chat   2.0地址  domain参数为generalv2
     public static final String hostUrl = "https://spark-api.xf-yun.com/v3.1/chat";
@@ -48,12 +43,12 @@ public class BigModelNew extends WebSocketListener {
     private static Boolean totalFlag = true; // 控制提示用户是否输入
 
     // 构造函数
-    public BigModelNew(String userId, Boolean wsCloseFlag) {
+    public BigModelChar(String userId, Boolean wsCloseFlag) {
         this.userId = userId;
         this.wsCloseFlag = wsCloseFlag;
     }
 
-    public BigModelNew(long questionId, RedissonClient redissonClient) {
+    public BigModelChar(long questionId, RedissonClient redissonClient) {
         this.questionId = questionId;
         this.redissonClient = redissonClient;
     }
@@ -70,7 +65,7 @@ public class BigModelNew extends WebSocketListener {
             Request request = new Request.Builder().url(url).build();
             for (int i = 0; i < 1; i++) {
                 totalAnswer = "";
-                WebSocket webSocket = client.newWebSocket(request, new BigModelNew(i + "",
+                WebSocket webSocket = client.newWebSocket(request, new BigModelChar(i + "",
                         false));
             }
 

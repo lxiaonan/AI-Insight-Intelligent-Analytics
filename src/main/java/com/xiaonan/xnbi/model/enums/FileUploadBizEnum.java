@@ -9,11 +9,12 @@ import org.apache.commons.lang3.ObjectUtils;
  * 文件上传业务类型枚举
  *
  * @author <a href="https://github.com/lixiaonan">小楠</a>
- * 
+ *
  */
 public enum FileUploadBizEnum {
 
-    USER_AVATAR("用户头像", "user_avatar");
+    USER_AVATAR("用户头像", "user_avatar"),
+    IMAGE_AI("ai解析图片", "image_ai");
 
     private final String text;
 
