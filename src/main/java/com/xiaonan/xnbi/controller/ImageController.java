@@ -4,10 +4,7 @@ import cn.hutool.core.io.FileUtil;
 import com.xiaonan.xnbi.common.BaseResponse;
 import com.xiaonan.xnbi.common.ErrorCode;
 import com.xiaonan.xnbi.common.ResultUtils;
-import com.xiaonan.xnbi.constant.FileConstant;
 import com.xiaonan.xnbi.exception.BusinessException;
-import com.xiaonan.xnbi.manager.CosManager;
-import com.xiaonan.xnbi.model.dto.file.UploadFileRequest;
 import com.xiaonan.xnbi.model.dto.image.UploadImageRequest;
 import com.xiaonan.xnbi.model.entity.Image;
 import com.xiaonan.xnbi.model.entity.User;
@@ -27,11 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.FileInputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Base64;
 
 /**
  * 文件接口
