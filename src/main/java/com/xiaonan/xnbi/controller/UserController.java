@@ -6,7 +6,6 @@ import com.xiaonan.xnbi.common.BaseResponse;
 import com.xiaonan.xnbi.common.DeleteRequest;
 import com.xiaonan.xnbi.common.ErrorCode;
 import com.xiaonan.xnbi.common.ResultUtils;
-import com.xiaonan.xnbi.config.WxOpenConfig;
 import com.xiaonan.xnbi.constant.UserConstant;
 import com.xiaonan.xnbi.exception.BusinessException;
 import com.xiaonan.xnbi.exception.ThrowUtils;
@@ -23,20 +22,15 @@ import com.xiaonan.xnbi.model.vo.UserVO;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.xiaonan.xnbi.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
-import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
-import me.chanjar.weixin.mp.api.WxMpService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**

@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xiaonan.xnbi.model.dto.chart.ChartQueryRequest;
 import com.xiaonan.xnbi.model.entity.Chart;
-import com.xiaonan.xnbi.model.entity.Post;
 
 /**
 * @author 罗宇楠

@@ -14,6 +14,7 @@ import org.apache.commons.lang3.ObjectUtils;
 public enum FileUploadBizEnum {
 
     USER_AVATAR("用户头像", "user_avatar"),
+    TEXT_AI("文本识别", "text_ai"),
     IMAGE_AI("ai解析图片", "image_ai");
 
     private final String text;

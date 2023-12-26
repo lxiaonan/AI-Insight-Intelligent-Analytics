@@ -4,20 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xiaonan.xnbi.constant.CommonConstant;
 import com.xiaonan.xnbi.model.dto.chart.ChartQueryRequest;
-import com.xiaonan.xnbi.model.dto.post.PostQueryRequest;
 import com.xiaonan.xnbi.model.entity.Chart;
-import com.xiaonan.xnbi.model.entity.Chart;
-import com.xiaonan.xnbi.model.entity.Post;
 import com.xiaonan.xnbi.model.enums.ChartStateEnum;
 import com.xiaonan.xnbi.service.ChartService;
 import com.xiaonan.xnbi.mapper.ChartMapper;
 import com.xiaonan.xnbi.utils.SqlUtils;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
 * @author 罗宇楠

@@ -275,6 +275,7 @@ public class ChartController {
         ThrowUtils.throwIf(!save, ErrorCode.SYSTEM_ERROR, "保存失败");
         //限流
         redisLimiterManager.doRateLimit("aiLimiter:" + loginUser.getId());
+        //调用ai
         AiUtils aiUtils = new AiUtils(redissonClient);
         AIResultDto ans = aiUtils.getAns(chart.getId(), res.toString());
 
