@@ -8,8 +8,7 @@ import com.xiaonan.xnbi.model.dto.chart.AIResultDto;
 import com.xiaonan.xnbi.model.entity.Chart;
 import com.xiaonan.xnbi.model.enums.ChartStateEnum;
 import com.xiaonan.xnbi.service.ChartService;
-import com.xiaonan.xnbi.utils.AiUtils;
-import com.xiaonan.xnbi.utils.ExcelUtils;
+import com.xiaonan.xnbi.utils.excelAnalysis.AiUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RedissonClient;
@@ -34,18 +33,19 @@ public class BiConsumer {
 
     /**
      * 监听消息处理
+     *
      * @param message
      * @param channel
      * @param deliveryTag
      */
-    @RabbitListener(queues = {"bi_queue"},ackMode = "MANUAL")
+    @RabbitListener(queues = {"bi_queue"}, ackMode = "MANUAL")
     public void receiveMessage(String message, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag) {
         log.info("receiveMessage message = {}", message);
-        if(StringUtils.isBlank(message)){
+        if (StringUtils.isBlank(message)) {
             log.error("信息为空");
             //空消息是没有价值的，直接确认
             try {
-                channel.basicAck(deliveryTag,false);
+                channel.basicAck(deliveryTag, false);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -72,7 +72,7 @@ public class BiConsumer {
         boolean update = chartService.updateById(chart);
         if (!update) {
             try {
-                channel.basicNack(deliveryTag,false,true);
+                channel.basicNack(deliveryTag, false, true);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -94,7 +94,7 @@ public class BiConsumer {
             boolean success = chartService.updateById(succeedChart);
             if (!success) {
                 try {
-                    channel.basicNack(deliveryTag,false,false);
+                    channel.basicNack(deliveryTag, false, false);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -104,7 +104,7 @@ public class BiConsumer {
         } else {
             //确定为失败消息，消息重复执行
             try {
-                channel.basicNack(deliveryTag,false,true);
+                channel.basicNack(deliveryTag, false, true);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

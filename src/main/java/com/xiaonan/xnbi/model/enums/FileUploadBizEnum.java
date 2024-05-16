@@ -8,7 +8,7 @@ import org.apache.commons.lang3.ObjectUtils;
 /**
  * 文件上传业务类型枚举
  *
- * @author <a href="https://github.com/lixiaonan">小楠</a>
+ * @author <a href="https://github.com/lxiaonan">小楠</a>
  *
  */
 public enum FileUploadBizEnum {

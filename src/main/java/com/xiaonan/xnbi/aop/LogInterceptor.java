@@ -16,8 +16,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 /**
  * 请求响应日志 AOP
  *
- * @author <a href="https://github.com/lixiaonan">小楠</a>
- * 
+ * @author <a href="https://github.com/lxiaonan">小楠</a>
+ *
  **/
 @Aspect
 @Component
@@ -27,7 +27,7 @@ public class LogInterceptor {
     /**
      * 执行拦截
      */
-    @Around("execution(* com.xiaonan.springbootinit.controller.*.*(..))")
+    @Around("execution(* com.xiaonan.xnbi.controller.*.*(..))")
     public Object doInterceptor(ProceedingJoinPoint point) throws Throwable {
         // 计时
         StopWatch stopWatch = new StopWatch();

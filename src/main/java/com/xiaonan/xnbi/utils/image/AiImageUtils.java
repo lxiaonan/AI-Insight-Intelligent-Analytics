@@ -1,7 +1,5 @@
 package com.xiaonan.xnbi.utils.image;
 
-import com.xiaonan.xnbi.model.dto.chart.AIResultDto;
-import com.xiaonan.xnbi.utils.BigModelChar;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RedissonClient;
 

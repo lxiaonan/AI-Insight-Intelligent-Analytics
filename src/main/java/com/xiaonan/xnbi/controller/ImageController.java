@@ -27,9 +27,9 @@ import java.io.File;
 import java.util.Arrays;
 
 /**
- * 文件接口
+ * 图片分析接口
  *
- * @author <a href="https://github.com/lixiaonan">小楠</a>
+ * @author <a href="https://github.com/lxiaonan">小楠</a>
  *
  */
 @RestController

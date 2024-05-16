@@ -3,8 +3,8 @@ package com.xiaonan.xnbi.constant;
 /**
  * 用户常量
  *
- * @author <a href="https://github.com/lixiaonan">小楠</a>
- * 
+ * @author <a href="https://github.com/lxiaonan">小楠</a>
+ *
  */
 public interface UserConstant {
 
@@ -29,6 +29,4 @@ public interface UserConstant {
      * 被封号
      */
     String BAN_ROLE = "ban";
-
-    // endregion
 }

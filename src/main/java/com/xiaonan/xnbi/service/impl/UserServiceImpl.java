@@ -24,7 +24,6 @@ import com.xiaonan.xnbi.model.vo.UserVO;
 import com.xiaonan.xnbi.service.UserService;
 import com.xiaonan.xnbi.utils.SqlUtils;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -36,7 +35,7 @@ import static com.xiaonan.xnbi.constant.UserConstant.USER_LOGIN_STATE;
  * 用户服务实现
  *
  * @author <a href="https://github.com/xiaonan">小楠</a>
- * @from 
+ * @from
  */
 @Service
 @Slf4j

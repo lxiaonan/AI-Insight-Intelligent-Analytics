@@ -22,7 +22,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 /**
  * 权限校验 AOP
  *
- * @author <a href="https://github.com/lixiaonan">小楠</a>
+ * @author <a href="https://github.com/lxiaonan">小楠</a>
  *
  */
 @Aspect

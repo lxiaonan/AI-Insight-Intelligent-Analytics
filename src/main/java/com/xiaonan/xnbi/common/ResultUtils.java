@@ -3,7 +3,7 @@ package com.xiaonan.xnbi.common;
 /**
  * 返回工具类
  *
- * @author <a href="https://github.com/lixiaonan">小楠</a>
+ * @author <a href="https://github.com/lxiaonan">小楠</a>
  * 
  */
 public class ResultUtils {
@@ -12,7 +12,7 @@ public class ResultUtils {
      * 成功
      *
      * @param data
-     * @param <T>
+     * 
      * @return
      */
     public static <T> BaseResponse<T> success(T data) {

@@ -3,7 +3,7 @@ package com.xiaonan.xnbi.common;
 /**
  * 自定义错误码
  *
- * @author <a href="https://github.com/lixiaonan">小楠</a>
+ * @author <a href="https://github.com/lxiaonan">小楠</a>
  *
  */
 public enum ErrorCode {

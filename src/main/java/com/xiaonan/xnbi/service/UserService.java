@@ -10,13 +10,12 @@ import com.xiaonan.xnbi.model.dto.user.UserQueryRequest;
 import com.xiaonan.xnbi.model.entity.User;
 import com.xiaonan.xnbi.model.vo.LoginUserVO;
 import com.xiaonan.xnbi.model.vo.UserVO;
-import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 
 /**
  * 用户服务
  *
  * @author <a href="https://github.com/xiaonan">小楠</a>
- * @from 
+ * @from
  */
 public interface UserService extends IService<User> {
 

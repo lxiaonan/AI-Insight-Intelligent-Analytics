@@ -19,8 +19,8 @@ import com.xiaonan.xnbi.model.enums.ChartStateEnum;
 import com.xiaonan.xnbi.mq.MyMessageProducer;
 import com.xiaonan.xnbi.service.ChartService;
 import com.xiaonan.xnbi.service.UserService;
-import com.xiaonan.xnbi.utils.AiUtils;
-import com.xiaonan.xnbi.utils.ExcelUtils;
+import com.xiaonan.xnbi.utils.excelAnalysis.AiUtils;
+import com.xiaonan.xnbi.utils.excelAnalysis.ExcelUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
@@ -34,9 +34,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 
 /**
- * 帖子接口
+ * 智能接口
  *
- * @author <a href="https://github.com/lixiaonan">小楠</a>
+ * @author <a href="https://github.com/lxiaonan">小楠</a>
  */
 @RestController
 @RequestMapping("/chart")

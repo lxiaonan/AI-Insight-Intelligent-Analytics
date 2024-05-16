@@ -5,7 +5,7 @@ import com.xiaonan.xnbi.common.ErrorCode;
 /**
  * 自定义异常类
  *
- * @author <a href="https://github.com/lixiaonan">小楠</a>
+ * @author <a href="https://github.com/lxiaonan">小楠</a>
  * 
  */
 public class BusinessException extends RuntimeException {

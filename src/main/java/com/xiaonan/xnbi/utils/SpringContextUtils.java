@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * Spring 上下文获取工具
  *
- * @author <a href="https://github.com/lixiaonan">小楠</a>
+ * @author <a href="https://github.com/lxiaonan">小楠</a>
  * 
  */
 @Component
@@ -36,7 +36,7 @@ public class SpringContextUtils implements ApplicationContextAware {
      * 通过 class 获取 Bean
      *
      * @param beanClass
-     * @param <T>
+     * 
      * @return
      */
     public static <T> T getBean(Class<T> beanClass) {
@@ -48,7 +48,7 @@ public class SpringContextUtils implements ApplicationContextAware {
      *
      * @param beanName
      * @param beanClass
-     * @param <T>
+     * 
      * @return
      */
     public static <T> T getBean(String beanName, Class<T> beanClass) {

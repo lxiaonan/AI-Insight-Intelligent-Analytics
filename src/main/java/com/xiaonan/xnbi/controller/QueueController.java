@@ -14,9 +14,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 
 /**
- * 帖子接口
+ * 队列接口
  *
- * @author <a href="https://github.com/lixiaonan">小楠</a>
+ * @author <a href="https://github.com/lxiaonan">小楠</a>
  */
 @RestController
 @RequestMapping("/queue")

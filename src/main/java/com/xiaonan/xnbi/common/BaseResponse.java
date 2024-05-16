@@ -6,8 +6,8 @@ import lombok.Data;
 /**
  * 通用返回类
  *
- * @param <T>
- * @author <a href="https://github.com/lixiaonan">小楠</a>
+ * 
+ * @author <a href="https://github.com/lxiaonan">小楠</a>
  * 
  */
 @Data

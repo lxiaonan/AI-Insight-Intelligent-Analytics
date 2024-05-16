@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 查询请求
  *
- * @author <a href="https://github.com/lixiaonan">小楠</a>
+ * @author <a href="https://github.com/lxiaonan">小楠</a>
  *
  */
 @EqualsAndHashCode(callSuper = true)

@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * SQL 工具
  *
- * @author <a href="https://github.com/lixiaonan">小楠</a>
+ * @author <a href="https://github.com/lxiaonan">小楠</a>
  */
 public class SqlUtils {
 

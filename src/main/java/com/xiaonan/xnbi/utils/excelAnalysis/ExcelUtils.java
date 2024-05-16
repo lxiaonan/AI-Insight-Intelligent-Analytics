@@ -1,4 +1,4 @@
-package com.xiaonan.xnbi.utils;
+package com.xiaonan.xnbi.utils.excelAnalysis;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;

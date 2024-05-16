@@ -1,6 +1,7 @@
-package com.xiaonan.xnbi.utils;
+package com.xiaonan.xnbi.utils.excelAnalysis;
 
 import com.xiaonan.xnbi.model.dto.chart.AIResultDto;
+import com.xiaonan.xnbi.utils.excelAnalysis.BigModelChar;
 import org.redisson.api.RedissonClient;
 
 public class AiUtils {
