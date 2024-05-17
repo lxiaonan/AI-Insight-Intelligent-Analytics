@@ -5,18 +5,14 @@ import com.xiaonan.xnbi.common.BaseResponse;
 import com.xiaonan.xnbi.common.ErrorCode;
 import com.xiaonan.xnbi.common.ResultUtils;
 import com.xiaonan.xnbi.exception.BusinessException;
-import com.xiaonan.xnbi.model.dto.image.UploadImageRequest;
-import com.xiaonan.xnbi.model.dto.text.UploadTextRequest;
-import com.xiaonan.xnbi.model.entity.Image;
+
 import com.xiaonan.xnbi.model.entity.User;
 import com.xiaonan.xnbi.model.enums.FileUploadBizEnum;
-import com.xiaonan.xnbi.service.ImageService;
 import com.xiaonan.xnbi.service.UserService;
-import com.xiaonan.xnbi.utils.image.AiImageUtils;
-import com.xiaonan.xnbi.utils.text.CharacterRecognition;
+
+import com.xiaonan.xnbi.utils.text.UniversalCharacterRecognition;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.redisson.api.RedissonClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -69,9 +65,8 @@ public class TextController {
             newFile = File.createTempFile(filepath, null);
 
             file.transferTo(newFile);
-
-            CharacterRecognition characterRecognition = new CharacterRecognition(newFile);
-            String ans = characterRecognition.getResult();
+            UniversalCharacterRecognition ucr = new UniversalCharacterRecognition();
+            String ans = ucr.getRes(newFile);
 
             // 返回可访问地址
             return ResultUtils.success(ans);
