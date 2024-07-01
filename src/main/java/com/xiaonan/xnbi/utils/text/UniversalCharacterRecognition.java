@@ -1,6 +1,7 @@
 package com.xiaonan.xnbi.utils.text;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 
@@ -28,9 +29,9 @@ public class UniversalCharacterRecognition {
     private String requestUrl = "https://api.xf-yun.com/v1/private/sf8e6aca1";
 
     //控制台获取以下信息
-    private static String APPID = "*";
-    private static String apiSecret = "*";
-    private static String apiKey = "*";
+    private static String APPID = "a1478164";
+    private static String apiSecret = "YTVhYjY3NzRhOTA1ZTE5NGE1Mjg1YzMy";
+    private static String apiKey = "313464e9552146ff42a38755c05d08c0";
 
     //文件存放位置
     private static File file = null;
@@ -41,19 +42,24 @@ public class UniversalCharacterRecognition {
     public String getRes(File file) {
         this.file = file;
         UniversalCharacterRecognition demo = new UniversalCharacterRecognition();
-        String res = "";
+        StringBuilder res = new StringBuilder();
         try {
             String resp = demo.doRequest();
-            System.out.println("resp=>" + resp);
+//            System.out.println("resp=>" + resp);
             JsonParse myJsonParse = gson.fromJson(resp, JsonParse.class);
             String textBase64Decode = new String(Base64.getDecoder().decode(myJsonParse.payload.result.text), "UTF-8");
             JSONObject jsonObject = JSON.parseObject(textBase64Decode);
-            res = jsonObject.getJSONArray("pages").getJSONObject(0).getJSONArray("lines").getJSONObject(0).getJSONArray("words").getJSONObject(0).getString("content");
+            System.out.println(jsonObject.getJSONArray("pages"));
+
+            JSONArray jsonArray = jsonObject.getJSONArray("pages").getJSONObject(0).getJSONArray("lines");
+            for(int i = 0; i < jsonArray.size(); i++){
+                res.append(jsonArray.getJSONObject(i).getJSONArray("words").getJSONObject(0).getString("content"));
+            }
             System.out.println("text字段Base64解码后=>" + res);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return res;
+        return res.toString();
     }
 
     /**

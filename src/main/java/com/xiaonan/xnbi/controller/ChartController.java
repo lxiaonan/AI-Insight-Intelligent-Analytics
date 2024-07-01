@@ -337,8 +337,6 @@ public class ChartController {
         try {
             String message = chart.getId() + "," + loginUser.getId();
             myMessageProducer.sendMessage(message);
-
-
         } catch (Exception e) {
             chartService.handleChartUpdateError(chart.getId(), "Ai生成图表失败" + e.getMessage());
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "Ai生成图表失败");

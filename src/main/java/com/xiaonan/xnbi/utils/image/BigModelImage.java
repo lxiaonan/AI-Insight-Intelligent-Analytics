@@ -17,13 +17,16 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * 图片分析
+ */
 public class BigModelImage extends WebSocketListener {
     // 地址与鉴权信息  https://spark-api.xf-yun.com/v1.1/chat   1.5地址  domain参数为general
     // 地址与鉴权信息  https://spark-api.xf-yun.com/v2.1/chat   2.0地址  domain参数为generalv2
     public static final String hostUrl = "https://spark-api.cn-huabei-1.xf-yun.com/v2.1/image";
-    public static final String appid = "xxx";
-    public static final String apiSecret = "xx";
-    public static final String apiKey = "xx";
+    public static final String appid = "b9706276";
+    public static final String apiSecret = "MjliODA2YzdiYWUwZTAxMjYzZDI5NGJh";
+    public static final String apiKey = "3669b2806547033bab68989b079ed2f2";
 
 //    public static List<RoleContent> historyList = new ArrayList<>(); // 对话历史存储集合
 
@@ -53,12 +56,13 @@ public class BigModelImage extends WebSocketListener {
         this.wsCloseFlag = wsCloseFlag;
     }
 
-    public BigModelImage(File file, RedissonClient redissonClient,Long id) {
+    public BigModelImage(File file, RedissonClient redissonClient, Long id) {
         this.file = file;
         this.redissonClient = redissonClient;
         this.imageId = id;
     }
-    public void getResult(String question){
+
+    public void getResult(String question) {
         try {
             // 个性化参数入口，如果是并发使用，可以在这里模拟
             NewQuestion = question;
@@ -72,7 +76,7 @@ public class BigModelImage extends WebSocketListener {
                 WebSocket webSocket = client.newWebSocket(request, new BigModelImage(i + "",
                         false));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -235,6 +239,7 @@ public class BigModelImage extends WebSocketListener {
         }
         return totalAnswer;
     }
+
     @Override
     public void onMessage(WebSocket webSocket, String text) {
         // System.out.println(userId + "用来区分那个用户的结果" + text);
